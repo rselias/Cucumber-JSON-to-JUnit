@@ -5,7 +5,7 @@ with open("README.md", encoding="utf-8", mode="r") as fh:
 
 setuptools.setup(
     name="cucumber-json-to-junit-xml",
-    version="0.0.8",
+    version="0.0.9",
     author="Raymond Elias",
     author_email="ray.s.elias@gmail.com",
     description="Cucumber JSON to JUnit XML report conversion script",

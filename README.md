@@ -8,6 +8,6 @@ Note that the overall duration will be incorrect for parallel execution, as it i
 
 Usage:
 
-`pip install --index-url https://test.pypi.org/project/ cucumber-json-to-junit-xml`
+`pip install cucumber-json-to-junit-xml`
 
 `json_to_junit source-report.json target-report.xml`
