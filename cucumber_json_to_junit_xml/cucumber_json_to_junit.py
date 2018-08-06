@@ -32,7 +32,7 @@ def main():
 
     for feature in json_data:
 
-        feature_name = feature["name"]
+        feature_name = sanitize(feature["name"])
         scenarios = feature["elements"]
         feature_time = 0.0
 
@@ -41,7 +41,7 @@ def main():
 
             scenario_count += 1
 
-            scenario_name = scenario["name"]
+            scenario_name = sanitize(scenario["name"])
             steps_blob = "<![CDATA["
             err_blob = ""
             scenario_status = "passed"
@@ -49,10 +49,10 @@ def main():
 
             for step in scenario["steps"]:
 
-                description = step["name"]
+                description = sanitize(step["name"])
                 results = step["result"]
-                status = results["status"]
-                keyword = step["keyword"]
+                status = sanitize(results["status"])
+                keyword = sanitize(step["keyword"])
 
                 if status != "skipped":
                     scenario_time += float(results["duration"]) / 1000000000
@@ -66,7 +66,7 @@ def main():
                     steps_blob += "."
                 steps_blob += status + "\n"
                 if status == "failed":
-                    err_blob = results["error_message"]
+                    err_blob = sanitize(results["error_message"])
                     scenario_status = "failed"
                     failure_count += 1
 
@@ -79,7 +79,7 @@ def main():
             test_case += "name=\"" + scenario_name + "\" "
             test_case += "time=\"" + str(scenario_time) + "\">"
             if scenario_status == "passed":
-                test_case += "<system-out>" + steps_blob + "</system-out>\n</testcase>"
+                test_case += "<system-out>" + steps_blob + "</system-out>\n"
             else:
                 test_case += "<failure message=\"" + err_blob + "\">"
                 test_case += steps_blob + "</failure>\n"
@@ -105,6 +105,11 @@ def main():
         junit_file.write(test_suite)
 
     print("Done.")
+
+def sanitize(input):
+    input = input.replace("\"","&quot;").replace("&","&amp;")
+    input = input.replace("<","&lt;").replace(">","&gt;")
+    return input
 
 if __name__ == "__main__":
     # execute only if run as a script
