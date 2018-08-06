@@ -107,7 +107,7 @@ def main():
     print("Done.")
 
 def sanitize(input):
-    input = input.replace("\"","&quot;").replace("&","&amp;")
+    input = input.replace("&","&amp;").replace("\"","&quot;")
     input = input.replace("<","&lt;").replace(">","&gt;")
     return input
 
