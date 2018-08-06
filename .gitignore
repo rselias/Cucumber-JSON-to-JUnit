@@ -1,2 +1,3 @@
 /cucumber_json_to_junit_xml.egg-info/*
 /dist/*
+/build/*
