@@ -47,6 +47,11 @@ def main():
             scenario_status = "passed"
             scenario_time = 0.0
 
+            if scenario["type"] != "background":
+                for tag in scenario["tags"]:
+                    steps_blob += tag["name"] + " "
+                steps_blob += "\n"
+
             for step in scenario["steps"]:
 
                 description = sanitize(step["name"])
