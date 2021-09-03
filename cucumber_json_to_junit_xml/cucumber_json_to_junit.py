@@ -90,8 +90,8 @@ def main():
                 test_case += steps_blob + "</failure>\n"
             test_case += "</testcase>\n"
 
-        test_cases += test_case
-        test_suite_time += feature_time
+            test_cases += test_case
+            test_suite_time += feature_time
 
     test_suite = "<testsuite "
     test_suite += "failures=\"" + str(failure_count) + "\" "
